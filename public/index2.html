@@ -1,0 +1,118 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopZone - E-Commerce</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Shop<span>Zone</span></div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search products...">
+        <button onclick="searchProducts()">🔍</button>
+    </div>
+
+    <div class="header-actions">
+        <button onclick="showWishlist()">❤️ <span id="wishlistCount">0</span></button>
+        <button onclick="openCart()">🛒 <span id="cartCount">0</span></button>
+    </div>
+</header>
+
+<nav>
+    <button class="category active" onclick="filterProducts('All')">All</button>
+    <button class="category" onclick="filterProducts('Electronics')">Electronics</button>
+    <button class="category" onclick="filterProducts('Fashion')">Fashion</button>
+    <button class="category" onclick="filterProducts('Shoes')">Shoes</button>
+    <button class="category" onclick="filterProducts('Accessories')">Accessories</button>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <p>NEW COLLECTION</p>
+        <h1>Upgrade Your<br><span>Everyday Style</span></h1>
+        <p>Discover amazing products at affordable prices.</p>
+        <button onclick="scrollToProducts()">Shop Now →</button>
+    </div>
+</section>
+
+<section class="products-section" id="productsSection">
+    <div class="section-heading">
+        <h2>Featured Products</h2>
+        <p>Explore our latest products</p>
+    </div>
+
+    <div class="products" id="productContainer"></div>
+</section>
+
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+        <h2>🛒 Your Cart</h2>
+        <button onclick="closeCart()">✕</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-footer">
+        <div class="total">
+            <span>Total:</span>
+            <strong id="cartTotal">₹0</strong>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+</div>
+
+<div class="modal" id="checkoutModal">
+    <div class="checkout-box">
+        <button class="close-modal" onclick="closeCheckout()">✕</button>
+        <h2>Checkout</h2>
+
+        <form onsubmit="placeOrder(event)">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="text" placeholder="Address" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="PIN Code" required>
+
+            <select required>
+                <option value="">Select Payment Method</option>
+                <option>Cash on Delivery</option>
+                <option>UPI</option>
+                <option>Credit / Debit Card</option>
+            </select>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div>
+        <h2>ShopZone</h2>
+        <p>Your one-stop destination for online shopping.</p>
+    </div>
+
+    <div>
+        <h3>Quick Links</h3>
+        <p>Home</p>
+        <p>Products</p>
+        <p>About Us</p>
+    </div>
+
+    <div>
+        <h3>Contact</h3>
+        <p>📧 support@shopzone.com</p>
+        <p>📞 +91 98765 43210</p>
+    </div>
+</footer>
+
+<script src="script2.js"></script>
+</body>
+</html>
+```

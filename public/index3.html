@@ -1,0 +1,124 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - E-Commerce</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">Shop<span>Ease</span></div>
+
+    <div class="search">
+        <input type="text" id="search" placeholder="Search products...">
+        <button id="searchBtn">🔍</button>
+    </div>
+
+    <div class="actions">
+        <button id="homeBtn">Home</button>
+        <button id="wishlistBtn">❤️ <span id="wishCount">0</span></button>
+        <button id="cartBtn">🛒 <span id="cartCount">0</span></button>
+    </div>
+</header>
+
+<nav>
+    <button class="filter active" data-category="All">All</button>
+    <button class="filter" data-category="Electronics">Electronics</button>
+    <button class="filter" data-category="Fashion">Fashion</button>
+    <button class="filter" data-category="Shoes">Shoes</button>
+    <button class="filter" data-category="Accessories">Accessories</button>
+</nav>
+
+<section class="hero">
+    <div>
+        <p class="small">WELCOME TO SHOPEASE</p>
+        <h1>Shop Smart.<br><span>Live Better.</span></h1>
+        <p>Discover amazing products at the best prices.</p>
+        <button id="shopNow">Shop Now</button>
+    </div>
+</section>
+
+<section class="products-section" id="products">
+    <div class="title">
+        <h2>Our Products</h2>
+        <p>Explore our latest collection</p>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+</section>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="cart" id="cart">
+    <div class="cart-top">
+        <h2>Shopping Cart</h2>
+        <button id="closeCart">✕</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-bottom">
+        <div class="total">
+            <span>Total</span>
+            <strong id="total">₹0</strong>
+        </div>
+
+        <button id="checkout">Checkout</button>
+    </div>
+</aside>
+
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <button id="closeModal" class="close">✕</button>
+
+        <h2>Checkout</h2>
+        <p>Enter your details to place your order.</p>
+
+        <form id="checkoutForm">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Address" required>
+            <input type="text" placeholder="City" required>
+            <input type="text" placeholder="PIN Code" required>
+
+            <select required>
+                <option value="">Payment Method</option>
+                <option>Cash on Delivery</option>
+                <option>UPI</option>
+                <option>Credit Card</option>
+                <option>Debit Card</option>
+            </select>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div>
+        <h2>ShopEase</h2>
+        <p>Your trusted online shopping destination.</p>
+    </div>
+
+    <div>
+        <h3>Quick Links</h3>
+        <p>Home</p>
+        <p>Products</p>
+        <p>Contact</p>
+    </div>
+
+    <div>
+        <h3>Contact</h3>
+        <p>Email: support@shopease.com</p>
+        <p>Phone: +91 98765 43210</p>
+    </div>
+</footer>
+
+<script src="script3.js"></script>
+
+</body>
+</html>
+```

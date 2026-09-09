@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - E-Commerce</title>
+    <link rel="stylesheet" href="style5.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <span>Shop</span>Ease
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search for products, brands and more">
+        <button type="button" id="searchButton">🔍 Search</button>
+    </div>
+
+    <div class="header-buttons">
+        <button id="wishlistButton">❤️ <span id="wishlistCount">0</span></button>
+        <button id="cartButton">🛒 Cart <span id="cartCount">0</span></button>
+    </div>
+</header>
+
+<nav class="navbar">
+    <button onclick="showCategory('All')">All</button>
+    <button onclick="showCategory('Electronics')">Electronics</button>
+    <button onclick="showCategory('Fashion')">Fashion</button>
+    <button onclick="showCategory('Shoes')">Shoes</button>
+    <button onclick="showCategory('Accessories')">Accessories</button>
+</nav>
+
+<section class="hero">
+    <div>
+        <h1>Big Shopping Deals</h1>
+        <p>Best products at amazing prices</p>
+        <button id="shopNowButton">Shop Now</button>
+    </div>
+</section>
+
+<section class="products-section" id="productsSection">
+
+    <div class="section-heading">
+        <div>
+            <h2>Featured Products</h2>
+            <p id="resultText">Explore our latest products</p>
+        </div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+</section>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+        <h2>🛒 My Cart</h2>
+        <button id="closeCartButton">✕</button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-bottom">
+        <h3>Total: ₹<span id="cartTotal">0</span></h3>
+        <button id="checkoutButton">Proceed to Checkout</button>
+    </div>
+
+</aside>
+
+<div class="modal" id="checkoutModal">
+
+    <div class="checkout-box">
+
+        <button class="close-modal" id="closeCheckoutButton">✕</button>
+
+        <div id="checkoutStep1">
+
+            <h2>📦 Delivery Details</h2>
+
+            <form id="checkoutForm">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="customerName" required placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="customerMobile" required maxlength="10" placeholder="10 digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label>House / Address</label>
+                    <textarea id="customerAddress" required placeholder="Enter your complete address"></textarea>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <select id="customerCity" required>
+                            <option value="">Select City</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Surat">Surat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        <input type="text" id="customerPincode" required maxlength="6" placeholder="Pincode">
+                    </div>
+
+                </div>
+
+                <div class="delivery-preview" id="deliveryPreview">
+                    🚚 Select your city to see estimated delivery
+                </div>
+
+                <button type="submit" class="continue-button">
+                    Continue to Payment →
+                </button>
+
+            </form>
+
+        </div>
+
+        <div id="checkoutStep2" class="hidden">
+
+            <h2>💳 Payment</h2>
+
+            <div class="payment-summary">
+                <p>Amount to Pay</p>
+                <h1>₹<span id="paymentAmount">0</span></h1>
+            </div>
+
+            <div class="payment-methods">
+
+                <button class="payment-method active" id="upiPaymentButton">
+                    📱 UPI
+                </button>
+
+                <button class="payment-method" id="gpayPaymentButton">
+                    🟢 Google Pay
+                </button>
+
+            </div>
+
+            <div class="qr-section">
+
+                <h3>Scan QR Code</h3>
+
+                <div class="qr-code">
+                    <div class="qr-pattern"></div>
+                </div>
+
+                <p class="demo-note">
+                    Demo QR Payment
+                </p>
+
+                <p class="upi-id">
+                    UPI ID: shopease@upi
+                </p>
+
+                <button id="scanPaymentButton" class="scan-button">
+                    📷 Scan / Verify Payment
+                </button>
+
+                <div id="paymentMessage"></div>
+
+            </div>
+
+            <button id="placeOrderButton" class="place-order-button">
+                ✅ Place Order
+            </button>
+
+        </div>
+
+        <div id="checkoutStep3" class="hidden">
+
+            <div class="success-icon">✓</div>
+
+            <h2>Order Placed Successfully!</h2>
+
+            <p class="order-number">
+                Order ID: <strong id="orderId"></strong>
+            </p>
+
+            <div class="order-delivery-card">
+
+                <h3>🚚 Delivery Information</h3>
+
+                <p>
+                    <strong>Product:</strong>
+                    <span id="orderProduct"></span>
+                </p>
+
+                <p>
+                    <strong>Delivery City:</strong>
+                    <span id="orderCity"></span>
+                </p>
+
+                <p>
+                    <strong>Expected Date:</strong>
+                    <span id="orderDate"></span>
+                </p>
+
+                <p>
+                    <strong>Time:</strong>
+                    <span id="orderTime"></span>
+                </p>
+
+            </div>
+
+            <div class="tracking">
+
+                <h3>📦 Order Tracking</h3>
+
+                <div class="tracking-step completed">
+                    <span>✓</span>
+                    <div>
+                        <strong>Order Placed</strong>
+                        <small>Order confirmed</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step completed">
+                    <span>✓</span>
+                    <div>
+                        <strong>Packed</strong>
+                        <small>Product packed</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step active-track">
+                    <span>🚚</span>
+                    <div>
+                        <strong>Shipped</strong>
+                        <small>Product is on the way</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step">
+                    <span>○</span>
+                    <div>
+                        <strong>Out for Delivery</strong>
+                        <small>Coming to your home</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step">
+                    <span>○</span>
+                    <div>
+                        <strong>Delivered</strong>
+                        <small>Expected delivery date shown above</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="continueShoppingButton" class="continue-button">
+                Continue Shopping
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+
+    <div>
+        <h3>ShopEase</h3>
+        <p>Your trusted online shopping demo.</p>
+    </div>
+
+    <div>
+        <h3>Customer Service</h3>
+        <p>Help Center</p>
+        <p>Returns</p>
+        <p>Orders</p>
+    </div>
+
+    <div>
+        <h3>Payment</h3>
+        <p>UPI</p>
+        <p>Google Pay</p>
+        <p>QR Payment</p>
+    </div>
+
+</footer>
+
+<script src="script5.js"></script>
+
+</body>
+</html>
