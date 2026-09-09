@@ -1,406 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Ultimate Tic-Tac-Toe</title>
-
-    <link rel="stylesheet" href="/style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - E-Commerce</title>
+    <link rel="stylesheet" href="style5.css">
 </head>
 
 <body>
 
-<div class="background">
+<header class="header">
+    <div class="logo">
+        <span>Shop</span>Ease
+    </div>
 
-    <div class="app">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search for products, brands and more">
+        <button type="button" id="searchButton">🔍 Search</button>
+    </div>
 
-        <header>
+    <div class="header-buttons">
+        <button id="wishlistButton">❤️ <span id="wishlistCount">0</span></button>
+        <button id="cartButton">🛒 Cart <span id="cartCount">0</span></button>
+    </div>
+</header>
 
-            <div class="logo">
-                <span class="logo-x">X</span>
-                <span class="logo-o">O</span>
-            </div>
+<nav class="navbar">
+    <button onclick="showCategory('All')">All</button>
+    <button onclick="showCategory('Electronics')">Electronics</button>
+    <button onclick="showCategory('Fashion')">Fashion</button>
+    <button onclick="showCategory('Shoes')">Shoes</button>
+    <button onclick="showCategory('Accessories')">Accessories</button>
+</nav>
 
-            <h1>TIC-TAC-TOE</h1>
+<section class="hero">
+    <div>
+        <h1>Big Shopping Deals</h1>
+        <p>Best products at amazing prices</p>
+        <button id="shopNowButton">Shop Now</button>
+    </div>
+</section>
 
-            <p>REAL-TIME ONLINE 1v1</p>
+<section class="products-section" id="productsSection">
 
-            <div class="online">
+    <div class="section-heading">
+        <div>
+            <h2>Featured Products</h2>
+            <p id="resultText">Explore our latest products</p>
+        </div>
+    </div>
 
-                <span class="online-dot"></span>
+    <div class="product-grid" id="productGrid"></div>
 
-                <span id="onlinePlayers">
-                    0
-                </span>
+</section>
 
-                Players Online
+<div class="cart-overlay" id="cartOverlay"></div>
 
-            </div>
+<aside class="cart-panel" id="cartPanel">
 
-        </header>
+    <div class="cart-header">
+        <h2>🛒 My Cart</h2>
+        <button id="closeCartButton">✕</button>
+    </div>
 
+    <div id="cartItems"></div>
 
-        <!-- HOME -->
+    <div class="cart-bottom">
+        <h3>Total: ₹<span id="cartTotal">0</span></h3>
+        <button id="checkoutButton">Proceed to Checkout</button>
+    </div>
 
-        <section
-            id="homeScreen"
-            class="screen"
-        >
+</aside>
 
-            <div class="card home-card">
+<div class="modal" id="checkoutModal">
 
-                <div class="game-icon">
-                    ✕
+    <div class="checkout-box">
+
+        <button class="close-modal" id="closeCheckoutButton">✕</button>
+
+        <div id="checkoutStep1">
+
+            <h2>📦 Delivery Details</h2>
+
+            <form id="checkoutForm">
+
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="customerName" required placeholder="Enter your name">
                 </div>
 
-                <h2>Play Online</h2>
+                <div class="form-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" id="customerMobile" required maxlength="10" placeholder="10 digit mobile number">
+                </div>
 
-                <p class="description">
-                    Challenge another player
-                    in a real-time match.
+                <div class="form-group">
+                    <label>House / Address</label>
+                    <textarea id="customerAddress" required placeholder="Enter your complete address"></textarea>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <select id="customerCity" required>
+                            <option value="">Select City</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Surat">Surat</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pincode</label>
+                        <input type="text" id="customerPincode" required maxlength="6" placeholder="Pincode">
+                    </div>
+
+                </div>
+
+                <div class="delivery-preview" id="deliveryPreview">
+                    🚚 Select your city to see estimated delivery
+                </div>
+
+                <button type="submit" class="continue-button">
+                    Continue to Payment →
+                </button>
+
+            </form>
+
+        </div>
+
+        <div id="checkoutStep2" class="hidden">
+
+            <h2>💳 Payment</h2>
+
+            <div class="payment-summary">
+                <p>Amount to Pay</p>
+                <h1>₹<span id="paymentAmount">0</span></h1>
+            </div>
+
+            <div class="payment-methods">
+
+                <button class="payment-method active" id="upiPaymentButton">
+                    📱 UPI
+                </button>
+
+                <button class="payment-method" id="gpayPaymentButton">
+                    🟢 Google Pay
+                </button>
+
+            </div>
+
+            <div class="qr-section">
+
+                <h3>Scan QR Code</h3>
+
+                <div class="qr-code">
+                    <div class="qr-pattern"></div>
+                </div>
+
+                <p class="demo-note">
+                    Demo QR Payment
                 </p>
 
-                <button
-                    id="createRoomBtn"
-                    class="primary-btn"
-                >
-                    🎮 Create Room
-                </button>
-
-                <div class="or">
-                    <span></span>
-                    OR
-                    <span></span>
-                </div>
-
-                <input
-                    id="roomInput"
-                    type="text"
-                    placeholder="ENTER ROOM CODE"
-                    maxlength="6"
-                >
-
-                <button
-                    id="joinRoomBtn"
-                    class="secondary-btn"
-                >
-                    🚀 Join Room
-                </button>
-
-                <p
-                    id="homeMessage"
-                    class="message"
-                ></p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ROOM -->
-
-        <section
-            id="roomScreen"
-            class="screen hidden"
-        >
-
-            <div class="card">
-
-                <h2>Game Room</h2>
-
-                <p class="description">
-                    Share this code with your opponent
+                <p class="upi-id">
+                    UPI ID: shopease@upi
                 </p>
 
-                <div class="room-code-box">
-
-                    <span>ROOM CODE</span>
-
-                    <strong id="roomCode">
-                        ------
-                    </strong>
-
-                    <button
-                        id="copyRoomBtn"
-                        class="copy-btn"
-                    >
-                        📋 Copy Code
-                    </button>
-
-                </div>
-
-                <div
-                    id="roomStatus"
-                    class="room-status"
-                >
-                    Waiting for opponent...
-                </div>
-
-                <div class="player-list">
-
-                    <div
-                        id="player1Status"
-                        class="player"
-                    >
-
-                        <div class="player-symbol x">
-                            X
-                        </div>
-
-                        <div>
-                            <strong>
-                                Player 1
-                            </strong>
-
-                            <span>
-                                Waiting
-                            </span>
-                        </div>
-
-                    </div>
-
-                    <div
-                        id="player2Status"
-                        class="player"
-                    >
-
-                        <div class="player-symbol o">
-                            O
-                        </div>
-
-                        <div>
-                            <strong>
-                                Player 2
-                            </strong>
-
-                            <span>
-                                Waiting
-                            </span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <button
-                    id="readyBtn"
-                    class="primary-btn"
-                    disabled
-                >
-                    ✓ Ready
+                <button id="scanPaymentButton" class="scan-button">
+                    📷 Scan / Verify Payment
                 </button>
 
-                <button
-                    id="leaveRoomBtn"
-                    class="danger-btn"
-                >
-                    Leave Game
-                </button>
+                <div id="paymentMessage"></div>
 
             </div>
 
-        </section>
-
-
-        <!-- GAME -->
-
-        <section
-            id="gameScreen"
-            class="screen hidden"
-        >
-
-            <div class="game-header">
-
-                <div class="game-player player-one">
-
-                    <div class="avatar x">
-                        X
-                    </div>
-
-                    <div>
-                        <span>PLAYER 1</span>
-                        <strong id="gameScore1">
-                            0
-                        </strong>
-                    </div>
-
-                </div>
-
-                <div class="timer-box">
-
-                    <span>TIME</span>
-
-                    <strong id="timer">
-                        60
-                    </strong>
-
-                </div>
-
-                <div class="game-player player-two">
-
-                    <div>
-                        <span>PLAYER 2</span>
-                        <strong id="gameScore2">
-                            0
-                        </strong>
-                    </div>
-
-                    <div class="avatar o">
-                        O
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="turnText"
-                class="turn"
-            >
-                Your Turn
-            </div>
-
-
-            <div
-                id="board"
-                class="board"
-            >
-
-                <button
-                    class="cell"
-                    data-index="0"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="1"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="2"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="3"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="4"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="5"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="6"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="7"
-                ></button>
-
-                <button
-                    class="cell"
-                    data-index="8"
-                ></button>
-
-            </div>
-
-
-            <div class="score-bar">
-
-                <div>
-                    <span>YOU</span>
-
-                    <strong id="yourScore">
-                        0
-                    </strong>
-                </div>
-
-                <div>
-                    <span>DRAWS</span>
-
-                    <strong id="draws">
-                        0
-                    </strong>
-                </div>
-
-                <div>
-                    <span>OPPONENT</span>
-
-                    <strong id="opponentScore">
-                        0
-                    </strong>
-                </div>
-
-            </div>
-
-
-            <button
-                id="gameLeaveBtn"
-                class="leave-small"
-            >
-                ← Leave Game
+            <button id="placeOrderButton" class="place-order-button">
+                ✅ Place Order
             </button>
 
-        </section>
+        </div>
 
+        <div id="checkoutStep3" class="hidden">
 
-        <!-- RESULT -->
+            <div class="success-icon">✓</div>
 
-        <div
-            id="resultBox"
-            class="result-overlay hidden"
-        >
+            <h2>Order Placed Successfully!</h2>
 
-            <div class="result-card">
+            <p class="order-number">
+                Order ID: <strong id="orderId"></strong>
+            </p>
 
-                <div
-                    id="resultIcon"
-                    class="result-icon"
-                >
-                    🏆
-                </div>
+            <div class="order-delivery-card">
 
-                <h2 id="resultText">
-                    You Win!
-                </h2>
+                <h3>🚚 Delivery Information</h3>
 
-                <p id="resultDescription">
-                    Great game!
+                <p>
+                    <strong>Product:</strong>
+                    <span id="orderProduct"></span>
                 </p>
 
-                <button
-                    id="rematchBtn"
-                    class="primary-btn"
-                >
-                    🔄 Rematch
-                </button>
+                <p>
+                    <strong>Delivery City:</strong>
+                    <span id="orderCity"></span>
+                </p>
 
-                <button
-                    id="resultLeaveBtn"
-                    class="danger-btn"
-                >
-                    Leave Game
-                </button>
+                <p>
+                    <strong>Expected Date:</strong>
+                    <span id="orderDate"></span>
+                </p>
+
+                <p>
+                    <strong>Time:</strong>
+                    <span id="orderTime"></span>
+                </p>
 
             </div>
+
+            <div class="tracking">
+
+                <h3>📦 Order Tracking</h3>
+
+                <div class="tracking-step completed">
+                    <span>✓</span>
+                    <div>
+                        <strong>Order Placed</strong>
+                        <small>Order confirmed</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step completed">
+                    <span>✓</span>
+                    <div>
+                        <strong>Packed</strong>
+                        <small>Product packed</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step active-track">
+                    <span>🚚</span>
+                    <div>
+                        <strong>Shipped</strong>
+                        <small>Product is on the way</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step">
+                    <span>○</span>
+                    <div>
+                        <strong>Out for Delivery</strong>
+                        <small>Coming to your home</small>
+                    </div>
+                </div>
+
+                <div class="tracking-step">
+                    <span>○</span>
+                    <div>
+                        <strong>Delivered</strong>
+                        <small>Expected delivery date shown above</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <button id="continueShoppingButton" class="continue-button">
+                Continue Shopping
+            </button>
 
         </div>
 
@@ -408,11 +272,30 @@
 
 </div>
 
+<footer>
 
-<script src="/socket.io/socket.io.js"></script>
+    <div>
+        <h3>ShopEase</h3>
+        <p>Your trusted online shopping demo.</p>
+    </div>
 
-<script src="/game.js"></script>
+    <div>
+        <h3>Customer Service</h3>
+        <p>Help Center</p>
+        <p>Returns</p>
+        <p>Orders</p>
+    </div>
+
+    <div>
+        <h3>Payment</h3>
+        <p>UPI</p>
+        <p>Google Pay</p>
+        <p>QR Payment</p>
+    </div>
+
+</footer>
+
+<script src="script5.js"></script>
 
 </body>
-
-</html>node -v
+</html>

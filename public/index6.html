@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Ultimate Tic-Tac-Toe</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+<div class="background">
+
+    <div class="app">
+
+        <header>
+
+            <div class="logo">
+                <span class="logo-x">X</span>
+                <span class="logo-o">O</span>
+            </div>
+
+            <h1>TIC-TAC-TOE</h1>
+
+            <p>REAL-TIME ONLINE 1v1</p>
+
+            <div class="online">
+
+                <span class="online-dot"></span>
+
+                <span id="onlinePlayers">
+                    0
+                </span>
+
+                Players Online
+
+            </div>
+
+        </header>
+
+
+        <!-- HOME -->
+
+        <section
+            id="homeScreen"
+            class="screen"
+        >
+
+            <div class="card home-card">
+
+                <div class="game-icon">
+                    ✕
+                </div>
+
+                <h2>Play Online</h2>
+
+                <p class="description">
+                    Challenge another player
+                    in a real-time match.
+                </p>
+
+                <button
+                    id="createRoomBtn"
+                    class="primary-btn"
+                >
+                    🎮 Create Room
+                </button>
+
+                <div class="or">
+                    <span></span>
+                    OR
+                    <span></span>
+                </div>
+
+                <input
+                    id="roomInput"
+                    type="text"
+                    placeholder="ENTER ROOM CODE"
+                    maxlength="6"
+                >
+
+                <button
+                    id="joinRoomBtn"
+                    class="secondary-btn"
+                >
+                    🚀 Join Room
+                </button>
+
+                <p
+                    id="homeMessage"
+                    class="message"
+                ></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROOM -->
+
+        <section
+            id="roomScreen"
+            class="screen hidden"
+        >
+
+            <div class="card">
+
+                <h2>Game Room</h2>
+
+                <p class="description">
+                    Share this code with your opponent
+                </p>
+
+                <div class="room-code-box">
+
+                    <span>ROOM CODE</span>
+
+                    <strong id="roomCode">
+                        ------
+                    </strong>
+
+                    <button
+                        id="copyRoomBtn"
+                        class="copy-btn"
+                    >
+                        📋 Copy Code
+                    </button>
+
+                </div>
+
+                <div
+                    id="roomStatus"
+                    class="room-status"
+                >
+                    Waiting for opponent...
+                </div>
+
+                <div class="player-list">
+
+                    <div
+                        id="player1Status"
+                        class="player"
+                    >
+
+                        <div class="player-symbol x">
+                            X
+                        </div>
+
+                        <div>
+                            <strong>
+                                Player 1
+                            </strong>
+
+                            <span>
+                                Waiting
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="player2Status"
+                        class="player"
+                    >
+
+                        <div class="player-symbol o">
+                            O
+                        </div>
+
+                        <div>
+                            <strong>
+                                Player 2
+                            </strong>
+
+                            <span>
+                                Waiting
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <button
+                    id="readyBtn"
+                    class="primary-btn"
+                    disabled
+                >
+                    ✓ Ready
+                </button>
+
+                <button
+                    id="leaveRoomBtn"
+                    class="danger-btn"
+                >
+                    Leave Game
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME -->
+
+        <section
+            id="gameScreen"
+            class="screen hidden"
+        >
+
+            <div class="game-header">
+
+                <div class="game-player player-one">
+
+                    <div class="avatar x">
+                        X
+                    </div>
+
+                    <div>
+                        <span>PLAYER 1</span>
+                        <strong id="gameScore1">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+                <div class="timer-box">
+
+                    <span>TIME</span>
+
+                    <strong id="timer">
+                        60
+                    </strong>
+
+                </div>
+
+                <div class="game-player player-two">
+
+                    <div>
+                        <span>PLAYER 2</span>
+                        <strong id="gameScore2">
+                            0
+                        </strong>
+                    </div>
+
+                    <div class="avatar o">
+                        O
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="turnText"
+                class="turn"
+            >
+                Your Turn
+            </div>
+
+
+            <div
+                id="board"
+                class="board"
+            >
+
+                <button
+                    class="cell"
+                    data-index="0"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="1"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="2"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="3"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="4"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="5"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="6"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="7"
+                ></button>
+
+                <button
+                    class="cell"
+                    data-index="8"
+                ></button>
+
+            </div>
+
+
+            <div class="score-bar">
+
+                <div>
+                    <span>YOU</span>
+
+                    <strong id="yourScore">
+                        0
+                    </strong>
+                </div>
+
+                <div>
+                    <span>DRAWS</span>
+
+                    <strong id="draws">
+                        0
+                    </strong>
+                </div>
+
+                <div>
+                    <span>OPPONENT</span>
+
+                    <strong id="opponentScore">
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <button
+                id="gameLeaveBtn"
+                class="leave-small"
+            >
+                ← Leave Game
+            </button>
+
+        </section>
+
+
+        <!-- RESULT -->
+
+        <div
+            id="resultBox"
+            class="result-overlay hidden"
+        >
+
+            <div class="result-card">
+
+                <div
+                    id="resultIcon"
+                    class="result-icon"
+                >
+                    🏆
+                </div>
+
+                <h2 id="resultText">
+                    You Win!
+                </h2>
+
+                <p id="resultDescription">
+                    Great game!
+                </p>
+
+                <button
+                    id="rematchBtn"
+                    class="primary-btn"
+                >
+                    🔄 Rematch
+                </button>
+
+                <button
+                    id="resultLeaveBtn"
+                    class="danger-btn"
+                >
+                    Leave Game
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="/game.js"></script>
+
+</body>
+
+</html>node -v
