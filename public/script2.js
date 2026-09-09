@@ -1,4 +1,4 @@
-```javascript
+
 const products = [
     {
         id: 1,
@@ -296,4 +296,4 @@ function placeOrder(event) {
 
 displayProducts();
 updateCart();
-```
+
